@@ -15,8 +15,17 @@ namespace RosalindSolver
         {
             var builder = new ContainerBuilder();
 
-            builder.Register(c => new ServerConfiguration("")).AsSelf();
-            builder.Register(c => new UserConfiguration("", "")).AsSelf();
+            builder.Register(c => new ServerConfigurationProvider())
+                   .As<IConfigurationProvider<ServerConfiguration>>();
+
+            builder.Register(c => new UserConfigurationProvider())
+                   .As<IConfigurationProvider<UserConfiguration>>();
+
+            builder.Register(c => new DefaultServerAdapter(
+                    c.Resolve<IConfigurationProvider<ServerConfiguration>>().GetConfiguration(), 
+                    c.Resolve<IConfigurationProvider<UserConfiguration>>().GetConfiguration()
+                   )).AsSelf();
+
             var container = builder.Build();
             var t = container.Resolve<DefaultServerAdapter>();
 
@@ -24,7 +33,12 @@ namespace RosalindSolver
                 new ServerConfigurationProvider().GetConfiguration(),
                 new UserConfigurationProvider().GetConfiguration());
 
-            server.SolveAsync("fibo").GetAwaiter().GetResult();
+            //server.SendSolutionAsync("fibo").GetAwaiter().GetResult();
         }
+    }
+
+    internal class ProblemSelector
+    {
+        
     }
 }

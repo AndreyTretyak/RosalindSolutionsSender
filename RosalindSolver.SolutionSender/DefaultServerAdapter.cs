@@ -41,7 +41,33 @@ namespace RosalindSolver.SolutionSender
         }
     }
 
-    public class DefaultServerAdapter
+    public struct SolverCheckResult
+    {
+        public bool IsCorrect { get; }
+        public Stream Dataset { get; }
+        public Stream Answer { get; }
+
+        public SolverCheckResult(bool isCorrect, Stream dataset, Stream answer)
+        {
+            IsCorrect = isCorrect;
+            Dataset = dataset;
+            Answer = answer;
+        }
+    }
+
+    public interface ISolver
+    {
+        string Key { get; }
+        Task<Stream> SolveAsync(Stream dataset);
+        Task<Stream> GetSourceCodeAsync();
+    }
+
+    public interface IServerAdapter
+    {
+        Task<SolverCheckResult> SendSolutionAsync(ISolver solver);
+    }
+
+    public class DefaultServerAdapter : IServerAdapter
     {
         private readonly ServerConfiguration _serverConfiguration;
         private readonly UserConfiguration _userCongfiguration;
@@ -52,7 +78,7 @@ namespace RosalindSolver.SolutionSender
             _userCongfiguration = userCongfiguration;
         }
 
-        public async Task<bool> SolveAsync(string key)
+        public async Task<SolverCheckResult> SendSolutionAsync(ISolver solver)
         {
             var cookieContainer = new CookieContainer();
             using (var handler = new HttpClientHandler { CookieContainer = cookieContainer })
@@ -77,9 +103,11 @@ namespace RosalindSolver.SolutionSender
                 var response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
                 
-                var dataset = new StreamReader(await GetDatasetAsync(client, key)).ReadToEnd();
-
-                return await SendResultAsync(client, key, token, "75025");
+                var dataset = await GetDatasetAsync(client, solver.Key);
+                var answer = await solver.SolveAsync(dataset);
+                var code = await solver.GetSourceCodeAsync();
+                var isCorrect = await SendResultAsync(client, token, solver.Key, answer, code);
+                return new SolverCheckResult(isCorrect, dataset, answer);
             }
         }
 
@@ -90,7 +118,7 @@ namespace RosalindSolver.SolutionSender
             return await response.Content.ReadAsStreamAsync();
         }
 
-        private async Task<bool> SendResultAsync(HttpClient client, string key, string token, string result)
+        private async Task<bool> SendResultAsync(HttpClient client, string token, string key, Stream result, Stream code)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, _serverConfiguration.GetResultUri(key))
             {
