@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
-using RosalindSolver.SolutionSender;
-using System.Security;
 using System.IO;
 using System.Security.Cryptography;
+using RosalindSolver.Interfaces;
 
 namespace RosalindSolver
 {

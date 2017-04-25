@@ -42,7 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultServerAdapter.cs" />
+    <Compile Include="MultiPartDataContenExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RosalindSolver.Interfaces\RosalindSolver.Interfaces.csproj">
+      <Project>{745f5732-accd-4335-b45c-90a9224aa41c}</Project>
+      <Name>RosalindSolver.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

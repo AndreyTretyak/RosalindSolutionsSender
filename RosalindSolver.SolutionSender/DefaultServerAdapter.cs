@@ -1,72 +1,14 @@
-﻿using System;
+﻿using RosalindSolver.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace RosalindSolver.SolutionSender
+namespace RosalindSolver.ServerAdapter
 {
-    public class ServerConfiguration
-    {
-        private readonly Uri _host;
-        private readonly Uri _loginUri;
-        private readonly string _datasetUriTemplate;
-        private readonly string _resultUriTemplate;
-        public ServerConfiguration(string host)
-        {
-            _host = new Uri(host);
-            _loginUri = new Uri(_host, "/accounts/login/");
-            _datasetUriTemplate = host + "/problems/{0}/dataset/";
-            _resultUriTemplate = "/problems/{0}/";
-        }
-
-        public Uri GetHost() => _host;
-        public Uri GetLoginUri() => _loginUri;
-        public Uri GetDatasetUri(string key) => new Uri(string.Format(_datasetUriTemplate, key));
-        public Uri GetResultUri(string key) => new Uri(_host, string.Format(_resultUriTemplate, key));
-    }
-
-    public class UserConfiguration
-    {
-        public string Username { get; }
-        public string Password { get; }
-        public UserConfiguration(string username, string password)
-        {
-            Username = username;
-            Password = password;
-        }
-    }
-
-    public struct SolverCheckResult
-    {
-        public bool IsCorrect { get; }
-        public Stream Dataset { get; }
-        public Stream Answer { get; }
-
-        public SolverCheckResult(bool isCorrect, Stream dataset, Stream answer)
-        {
-            IsCorrect = isCorrect;
-            Dataset = dataset;
-            Answer = answer;
-        }
-    }
-
-    public interface ISolver
-    {
-        string Key { get; }
-        Task<Stream> SolveAsync(Stream dataset);
-        Task<Stream> GetSourceCodeAsync();
-    }
-
-    public interface IServerAdapter
-    {
-        Task<SolverCheckResult> SendSolutionAsync(ISolver solver);
-    }
-
     public class DefaultServerAdapter : IServerAdapter
     {
         private readonly ServerConfiguration _serverConfiguration;
@@ -103,6 +45,8 @@ namespace RosalindSolver.SolutionSender
                 var response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
                 
+
+
                 var dataset = await GetDatasetAsync(client, solver.Key);
                 var answer = await solver.SolveAsync(dataset);
                 var code = await solver.GetSourceCodeAsync();
@@ -111,14 +55,14 @@ namespace RosalindSolver.SolutionSender
             }
         }
 
-        private async Task<Stream> GetDatasetAsync(HttpClient client, string key)
+        private async Task<string> GetDatasetAsync(HttpClient client, string key)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, _serverConfiguration.GetDatasetUri(key));
             var response = await client.SendAsync(request);
-            return await response.Content.ReadAsStreamAsync();
+            return await response.Content.ReadAsStringAsync();
         }
 
-        private async Task<bool> SendResultAsync(HttpClient client, string token, string key, Stream result, Stream code)
+        private async Task<bool> SendResultAsync(HttpClient client, string token, string key, string result, string code)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, _serverConfiguration.GetResultUri(key))
             {
@@ -189,40 +133,5 @@ namespace RosalindSolver.SolutionSender
         //        fileStream.Dispose();
         //    }
         //}
-    }
-
-    internal static class MultiPartDataContenExtensions
-    {
-        private static readonly MediaTypeHeaderValue StreamMediaTypeValue = new MediaTypeHeaderValue("application/octet-stream");
-        private static readonly string EmptyWrappedName = WrapName(string.Empty);
-
-        internal static MultipartFormDataContent AddPartContent(this MultipartFormDataContent baseContent, string name, string stringContent)
-        {
-            var content = new ByteArrayContent(Encoding.UTF8.GetBytes(stringContent));
-            return baseContent.AddPartContent(name, content);
-        }
-
-        internal static MultipartFormDataContent AddPartContent(this MultipartFormDataContent baseContent, string name, Stream streamContent, string fileName = null)
-        {
-            var content = new StreamContent(streamContent);
-            content.Headers.ContentType = StreamMediaTypeValue;
-            var result = baseContent.AddPartContent(name, content);
-            content.Headers.ContentDisposition.FileName = WrapName(fileName);
-            return result;
-        }
-
-        private static MultipartFormDataContent AddPartContent(this MultipartFormDataContent baseContent, string name, HttpContent content)
-        {
-            var wrappedName = WrapName(name);
-            content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
-            {
-                Name = wrappedName
-            };
-
-            baseContent.Add(content, wrappedName);
-            return baseContent;
-        }
-
-        private static string WrapName(string name) => string.IsNullOrWhiteSpace(name) ? EmptyWrappedName : $"\"{name}\"";
     }
 }
