@@ -2,27 +2,34 @@
 using System.Text;
 using System.IO;
 using System.Security.Cryptography;
+using RosalindSolver.Configuration;
 using RosalindSolver.Interfaces;
 
 namespace RosalindSolver
 {
-    internal class UserConfigurationProvider : IConfigurationProvider<UserConfiguration>
+    internal class ConsoleUserConfigurationProvider : IConfigurationProvider<UserConfiguration>
     {
         private readonly UserConfigurationValueProvider userConfigurationProvider;
 
-        public UserConfigurationProvider()
+        public ConsoleUserConfigurationProvider(ConfigurationValueProvider provider)
         {
-            userConfigurationProvider = new UserConfigurationValueProvider("rosalind.user");
+            var fileName = provider.Get(ConfigurationConstants.UserConfigFileKey) ?? ConfigurationConstants.DefaultUserConfigFileName;
+            userConfigurationProvider = new UserConfigurationValueProvider(fileName);
         }
 
         public UserConfiguration GetConfiguration()
         {
-            var name = ConsoleHelper.RequestValueAndSaving("UserName", userConfigurationProvider);
-            var password = ConsoleHelper.RequestValueAndSaving("Password", userConfigurationProvider);
+            var name = ConsoleHelper.RequestValueAndSaving(ConfigurationConstants.UserNameKey, userConfigurationProvider);
+            var password = ConsoleHelper.RequestValueAndSaving(ConfigurationConstants.PasswordKey, userConfigurationProvider);
             return new UserConfiguration(name, password);
         }
 
-        internal class UserConfigurationValueProvider : IDefaultValueProvider
+        public void ClearConfiguration()
+        {
+            userConfigurationProvider.Clear();
+        }
+
+        internal class UserConfigurationValueProvider : IValueProvider
         {
             private readonly RijndaelManaged cryptoManaged;
             private readonly string configFileName;
@@ -33,7 +40,7 @@ namespace RosalindSolver
             {
                 configFileName = name;
                 cryptoManaged = new RijndaelManaged();
-                key = Encoding.Unicode.GetBytes($"testKey9");
+                key = Encoding.Unicode.GetBytes("testKey9");
             }
 
             private void ReadValuesFromFile()
@@ -64,7 +71,12 @@ namespace RosalindSolver
                     }
                 }
             }
-            
+
+            public void Clear()
+            {
+                File.Delete(configFileName);
+            }
+
             public string Get(string name)
             {
                 if (values == null) ReadValuesFromFile();

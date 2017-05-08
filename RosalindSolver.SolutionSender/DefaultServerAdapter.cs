@@ -11,22 +11,25 @@ namespace RosalindSolver.ServerAdapter
 {
     public class DefaultServerAdapter : IServerAdapter
     {
-        private readonly ServerConfiguration _serverConfiguration;
-        private readonly UserConfiguration _userCongfiguration;
+        private readonly IConfigurationProvider<ServerConfiguration> _serverConfigurationProvider;
+        private readonly IConfigurationProvider<UserConfiguration> _userCongfigurationProvider;
 
-        public DefaultServerAdapter(ServerConfiguration serverConfiguration, UserConfiguration userCongfiguration)
+        public DefaultServerAdapter(IConfigurationProvider<ServerConfiguration> serverConfigurationProvider, IConfigurationProvider<UserConfiguration> userCongfigurationProvider)
         {
-            _serverConfiguration = serverConfiguration;
-            _userCongfiguration = userCongfiguration;
+            _serverConfigurationProvider = serverConfigurationProvider;
+            _userCongfigurationProvider = userCongfigurationProvider;
         }
 
         public async Task<SolverCheckResult> SendSolutionAsync(ISolver solver)
         {
+            var serverConfiguration = _serverConfigurationProvider.GetConfiguration();
+            var userCongfiguration = _userCongfigurationProvider.GetConfiguration();
+
             var cookieContainer = new CookieContainer();
             using (var handler = new HttpClientHandler { CookieContainer = cookieContainer })
-            using (var client = new HttpClient(handler) { BaseAddress = _serverConfiguration.GetHost() })
+            using (var client = new HttpClient(handler) { BaseAddress = serverConfiguration.GetHost() })
             {
-                var loginUri = _serverConfiguration.GetLoginUri();
+                var loginUri = serverConfiguration.GetLoginUri();
                 var request = new HttpRequestMessage(HttpMethod.Get, loginUri);
                 await client.SendAsync(request);
 
@@ -36,8 +39,8 @@ namespace RosalindSolver.ServerAdapter
                     Content = new FormUrlEncodedContent(new Dictionary<string, string>
                     {
                         {"csrfmiddlewaretoken", token},
-                        {"username", _userCongfiguration.Username},
-                        {"password", _userCongfiguration.Password},
+                        {"username", userCongfiguration.Username},
+                        {"password", userCongfiguration.Password},
                         //{ "next", "/problems/fibo/dataset/" },
                     })
                 };
@@ -45,26 +48,24 @@ namespace RosalindSolver.ServerAdapter
                 var response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
                 
-
-
-                var dataset = await GetDatasetAsync(client, solver.Key);
+                var dataset = await GetDatasetAsync(client, serverConfiguration.GetDatasetUri(solver.Key));
                 var answer = await solver.SolveAsync(dataset);
                 var code = await solver.GetSourceCodeAsync();
-                var isCorrect = await SendResultAsync(client, token, solver.Key, answer, code);
+                var isCorrect = await SendResultAsync(client, token, serverConfiguration.GetResultUri(solver.Key), answer, code);
                 return new SolverCheckResult(isCorrect, dataset, answer);
             }
         }
 
-        private async Task<string> GetDatasetAsync(HttpClient client, string key)
+        private async Task<string> GetDatasetAsync(HttpClient client, Uri dataSetUrl)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, _serverConfiguration.GetDatasetUri(key));
+            var request = new HttpRequestMessage(HttpMethod.Get, dataSetUrl);
             var response = await client.SendAsync(request);
             return await response.Content.ReadAsStringAsync();
         }
 
-        private async Task<bool> SendResultAsync(HttpClient client, string token, string key, string result, string code)
+        private async Task<bool> SendResultAsync(HttpClient client, string token, Uri resultUri, string result, string code)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, _serverConfiguration.GetResultUri(key))
+            var request = new HttpRequestMessage(HttpMethod.Post, resultUri)
             {
                 Content = new MultipartFormDataContent()
                     .AddPartContent("csrfmiddlewaretoken", token)

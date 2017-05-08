@@ -4,6 +4,6 @@ namespace RosalindSolver.Interfaces
 {
     public interface ISolutionSender
     {
-        Task Send(string key);
+        Task<SolverCheckResult> SendAsync(string key);
     }
 }

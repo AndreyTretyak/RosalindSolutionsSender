@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RosalindSolver", "RosalindSolver\RosalindSolver.csproj", "{C8056FEA-CA29-4539-8CBF-1E0E7E00DDD4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RosalindSolver.Console", "RosalindSolver\RosalindSolver.Console.csproj", "{C8056FEA-CA29-4539-8CBF-1E0E7E00DDD4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RosalindSolver.ServerAdapter", "RosalindSolver.SolutionSender\RosalindSolver.ServerAdapter.csproj", "{CB4C7A08-B580-466D-8BE0-A27203FB68A1}"
 EndProject
@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RosalindSolver.Interfaces", "RosalindSolver.Interfaces\RosalindSolver.Interfaces.csproj", "{745F5732-ACCD-4335-B45C-90A9224AA41C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RosalindSolver.Solvers", "RosalindSolver.Solvers\RosalindSolver.Solvers.csproj", "{92551BBE-7021-4EB0-AAF3-0BEEE271E7A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RosalingSolver.Tests", "RosalingSolver.Tests\RosalingSolver.Tests.csproj", "{A4B45E67-5D13-4F27-8F8E-32A7EC7A8188}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +36,14 @@ Global
 		{745F5732-ACCD-4335-B45C-90A9224AA41C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{745F5732-ACCD-4335-B45C-90A9224AA41C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{745F5732-ACCD-4335-B45C-90A9224AA41C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92551BBE-7021-4EB0-AAF3-0BEEE271E7A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92551BBE-7021-4EB0-AAF3-0BEEE271E7A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92551BBE-7021-4EB0-AAF3-0BEEE271E7A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92551BBE-7021-4EB0-AAF3-0BEEE271E7A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4B45E67-5D13-4F27-8F8E-32A7EC7A8188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4B45E67-5D13-4F27-8F8E-32A7EC7A8188}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4B45E67-5D13-4F27-8F8E-32A7EC7A8188}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4B45E67-5D13-4F27-8F8E-32A7EC7A8188}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

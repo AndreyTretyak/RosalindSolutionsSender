@@ -7,5 +7,7 @@ namespace RosalindSolver.Interfaces
     public interface IConfigurationProvider<out T>
     {
         T GetConfiguration();
+
+        void ClearConfiguration();
     }
 }

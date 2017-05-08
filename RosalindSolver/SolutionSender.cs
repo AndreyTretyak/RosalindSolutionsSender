@@ -15,11 +15,12 @@ namespace RosalindSolver
             _solverProvider = solverProvider;
         }
 
-        public async Task Send(string key)
+        public async Task<SolverCheckResult> SendAsync(string key)
         {
             var solver = _solverProvider.Get(key);
             var result = await _server.SendSolutionAsync(solver);
             await CreateUnitTest(key, result);
+            return result;
         }
 
         private Task CreateUnitTest(string key, SolverCheckResult result)

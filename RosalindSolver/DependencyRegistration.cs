@@ -1,9 +1,9 @@
-﻿using Autofac;
-using System;
+﻿using System;
+using Autofac;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using RosalindSolver.Interfaces;
 using RosalindSolver.ServerAdapter;
 
@@ -13,28 +13,51 @@ namespace RosalindSolver
     {
         public static IContainer Build()
         {
+
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<ServerConfigurationProvider>()
+            builder.RegisterType<ConfigurationValueProvider>()
+                   .AsSelf();
+
+            builder.RegisterType<ConsoleServerConfigurationProvider>()
                    .As<IConfigurationProvider<ServerConfiguration>>();
 
-            builder.RegisterType<UserConfigurationProvider>()
+            builder.RegisterType<ConsoleUserConfigurationProvider>()
                    .As<IConfigurationProvider<UserConfiguration>>();
 
             builder.Register(c => c.Resolve<IConfigurationProvider<ServerConfiguration>>().GetConfiguration())
-                   .AsSelf();
+                   .As<ServerConfiguration>();
 
             builder.Register(c => c.Resolve<IConfigurationProvider<UserConfiguration>>().GetConfiguration())
-                   .AsSelf();
+                   .As<UserConfiguration>();
 
             builder.RegisterType<DefaultServerAdapter>()
                    .As<IServerAdapter>();
 
-            builder.RegisterType<SolverProvider>()
-                   .As<ISolverProvider>();
-
             builder.RegisterType<SolutionSender>()
                    .As<ISolutionSender>();
+
+            builder.RegisterType<SolverProvider>()
+                .As<ISolverProvider>();
+
+            builder.RegisterType<ConsoleSelectedProblemProvider>()
+                   .As<ISelectedProblemProvider>()
+                   .As<IUnsolvedProblemProvider>();
+
+            //builder.RegisterType<FiboSolver>().As<ISolver>().Keyed<ISolver>("fibo");
+            //builder.RegisterType<TestSolver>().As<ISolver>().Keyed<ISolver>("test");
+
+            //var solvers = Assembly.Load("RosalindSolver.Solvers").GetTypes()
+
+            var solverType = typeof(ISolver);
+            var solvers = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(a => a.GetTypes())
+                .Where(r => !r.IsInterface && !r.IsAbstract && r.IsAssignableFrom(solverType));
+
+            foreach (var solver in solvers)
+            {
+                builder.RegisterType(solver).As<ISolver>();
+            }
 
             return builder.Build();
         }
