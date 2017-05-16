@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RosalindSolver.App_LocalResourses;
+using RolalindSolver.Core.App_LocalResourses;
 using RosalindSolver.Interfaces;
 
 namespace RosalindSolver
 {
-    internal class ConsoleManager
+    public class SendingManager
     {
         private readonly IUserInputProvider _inputProvider;
         private readonly IConfigurationProvider<UserConfiguration> _userConfigurationProvider;
@@ -31,7 +31,7 @@ namespace RosalindSolver
 
         private readonly MenuItem[] _settingMenu; 
 
-        public ConsoleManager(
+        public SendingManager(
             IUserInputProvider inputProvider,
             IConfigurationProvider<UserConfiguration> userConfigurationProvider,
             IConfigurationProvider<ServerConfiguration> serverConfigurationProvider,

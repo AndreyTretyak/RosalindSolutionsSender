@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RosalindSolver.App_LocalResourses {
+namespace RolalindSolver.Core.App_LocalResourses {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace RosalindSolver.App_LocalResourses {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace RosalindSolver.App_LocalResourses {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RosalindSolver.App_LocalResourses.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RolalindSolver.Core.App_LocalResourses.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace RosalindSolver.App_LocalResourses {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace RosalindSolver.App_LocalResourses {
         /// <summary>
         ///   Looks up a localized string similar to Change current problem..
         /// </summary>
-        internal static string ChangeCurrentProblem {
+        public static string ChangeCurrentProblem {
             get {
                 return ResourceManager.GetString("ChangeCurrentProblem", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace RosalindSolver.App_LocalResourses {
         /// <summary>
         ///   Looks up a localized string similar to Change server settings..
         /// </summary>
-        internal static string ChangeServerSettings {
+        public static string ChangeServerSettings {
             get {
                 return ResourceManager.GetString("ChangeServerSettings", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace RosalindSolver.App_LocalResourses {
         /// <summary>
         ///   Looks up a localized string similar to Change user settings..
         /// </summary>
-        internal static string ChangeUserSettings {
+        public static string ChangeUserSettings {
             get {
                 return ResourceManager.GetString("ChangeUserSettings", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace RosalindSolver.App_LocalResourses {
         /// <summary>
         ///   Looks up a localized string similar to Clear solved problems records..
         /// </summary>
-        internal static string ClearSolvedProblemsRecords {
+        public static string ClearSolvedProblemsRecords {
             get {
                 return ResourceManager.GetString("ClearSolvedProblemsRecords", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace RosalindSolver.App_LocalResourses {
         /// <summary>
         ///   Looks up a localized string similar to Please enter valid item index:.
         /// </summary>
-        internal static string PleaseEnterValidIndex {
+        public static string PleaseEnterValidIndex {
             get {
                 return ResourceManager.GetString("PleaseEnterValidIndex", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace RosalindSolver.App_LocalResourses {
         /// <summary>
         ///   Looks up a localized string similar to Please enter &apos;{0}&apos; value:.
         /// </summary>
-        internal static string PleaseEnterValue {
+        public static string PleaseEnterValue {
             get {
                 return ResourceManager.GetString("PleaseEnterValue", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace RosalindSolver.App_LocalResourses {
         /// <summary>
         ///   Looks up a localized string similar to Please select problem for sending solution.
         /// </summary>
-        internal static string PleaseSelectProblem {
+        public static string PleaseSelectProblem {
             get {
                 return ResourceManager.GetString("PleaseSelectProblem", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace RosalindSolver.App_LocalResourses {
         /// <summary>
         ///   Looks up a localized string similar to Remember this value in config file? [Y] Yes / [N] No.
         /// </summary>
-        internal static string RememberValueRequest {
+        public static string RememberValueRequest {
             get {
                 return ResourceManager.GetString("RememberValueRequest", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace RosalindSolver.App_LocalResourses {
         /// <summary>
         ///   Looks up a localized string similar to Send all solutions..
         /// </summary>
-        internal static string SendAllSolutions {
+        public static string SendAllSolutions {
             get {
                 return ResourceManager.GetString("SendAllSolutions", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace RosalindSolver.App_LocalResourses {
         /// <summary>
         ///   Looks up a localized string similar to Send all unsolved..
         /// </summary>
-        internal static string SendAllUnsolved {
+        public static string SendAllUnsolved {
             get {
                 return ResourceManager.GetString("SendAllUnsolved", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace RosalindSolver.App_LocalResourses {
         /// <summary>
         ///   Looks up a localized string similar to Send currently selected problem..
         /// </summary>
-        internal static string SendCurrentlySelected {
+        public static string SendCurrentlySelected {
             get {
                 return ResourceManager.GetString("SendCurrentlySelected", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace RosalindSolver.App_LocalResourses {
         /// <summary>
         ///   Looks up a localized string similar to Value should not be empty.
         /// </summary>
-        internal static string ValueShoulNotBeEmpty {
+        public static string ValueShoulNotBeEmpty {
             get {
                 return ResourceManager.GetString("ValueShoulNotBeEmpty", resourceCulture);
             }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using RosalindSolver.App_LocalResourses;
+using RolalindSolver.Core.App_LocalResourses;
 using RosalindSolver.Interfaces;
 
 namespace RosalindSolver

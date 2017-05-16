@@ -44,12 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_LocalResourses\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Configuration\ConfigurationConstants.cs" />
     <Compile Include="Configuration\SelectedProblemProvider.cs" />
     <Compile Include="Configuration\ServerConfigurationProvider.cs" />
     <Compile Include="Configuration\UserConfigurationProvider.cs" />
     <Compile Include="Configuration\SolvedConfigurationProvider.cs" />
     <Compile Include="Configuration\Validator\FuncValidator.cs" />
+    <Compile Include="SendingManager.cs" />
     <Compile Include="IoC\DependencyContainer.cs" />
     <Compile Include="IoC\DependencyContainerBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,6 +82,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_LocalResourses\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
