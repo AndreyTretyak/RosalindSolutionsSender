@@ -1,8 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using RosalindSolver.Interfaces;
 
-namespace RosalindSolver
+namespace RolalindSolver.Core
 {
     internal class SolutionSender : ISolutionSender
     {

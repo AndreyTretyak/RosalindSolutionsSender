@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using RolalindSolver.Core.App_LocalResourses;
 using RosalindSolver.Interfaces;
 
-namespace RosalindSolver
+namespace RolalindSolver.Core
 {
     public class SendingManager
     {

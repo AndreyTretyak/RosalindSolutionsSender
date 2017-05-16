@@ -1,6 +1,6 @@
 using Autofac;
 
-namespace RosalindSolver
+namespace RolalindSolver.Core.IoC
 {
     public class DependencyContainer
     {

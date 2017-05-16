@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using RosalindSolver.Configuration;
 using RosalindSolver.Interfaces;
 
-namespace RosalindSolver
+namespace RolalindSolver.Core.Configuration
 {
     internal class SelectedProblemProvider : ISelectedProblemProvider, IUnsolvedProblemProvider
     {

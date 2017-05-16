@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using RosalindSolver.Interfaces;
 
-namespace RosalindSolver
+namespace RosalindSolver.Solvers
 {
     public class FiboSolver : ISolver
     {

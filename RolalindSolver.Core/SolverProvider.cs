@@ -2,7 +2,7 @@
 using System.Linq;
 using RosalindSolver.Interfaces;
 
-namespace RosalindSolver
+namespace RolalindSolver.Core
 {
     internal class SolverProvider : ISolverProvider
     {

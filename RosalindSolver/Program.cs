@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Text;
+using RolalindSolver.Core;
+using RolalindSolver.Core.IoC;
 using RosalindSolver.Interfaces;
 
 namespace RosalindSolver

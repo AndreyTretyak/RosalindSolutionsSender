@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using RosalindSolver.Configuration;
 using RosalindSolver.Interfaces;
 
-namespace RosalindSolver
+namespace RolalindSolver.Core.Configuration
 {
     internal class SolvedConfigurationProvider
     {

@@ -1,14 +1,12 @@
 ﻿using System;
-using Autofac;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
+using Autofac;
+using RolalindSolver.Core.Configuration;
 using RosalindSolver.Interfaces;
 using RosalindSolver.ServerAdapter;
 using RosalingSolver.TestGenerator;
 
-namespace RosalindSolver
+namespace RolalindSolver.Core.IoC
 {
     public class DependencyContainerBuilder
     {

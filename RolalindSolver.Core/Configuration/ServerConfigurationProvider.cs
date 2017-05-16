@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using RosalindSolver.Configuration;
-using RosalindSolver.Interfaces;
+﻿using RosalindSolver.Interfaces;
 
-namespace RosalindSolver
+namespace RolalindSolver.Core.Configuration
 {
     internal class ServerConfigurationProvider : IConfigurationProvider<ServerConfiguration>
     {

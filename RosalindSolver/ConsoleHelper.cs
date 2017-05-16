@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using RolalindSolver.Core.App_LocalResourses;
+using RolalindSolver.Core.Configuration.Validator;
 using RosalindSolver.Interfaces;
 
 namespace RosalindSolver

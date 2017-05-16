@@ -1,7 +1,7 @@
 using System;
 using RosalindSolver.Interfaces;
 
-namespace RosalindSolver
+namespace RolalindSolver.Core.Configuration.Validator
 {
     public class FuncValidator : IValueValidator
     {

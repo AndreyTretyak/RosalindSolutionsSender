@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Security.Cryptography;
-using RosalindSolver.Configuration;
+using System.Text;
 using RosalindSolver.Interfaces;
 
-namespace RosalindSolver
+namespace RolalindSolver.Core.Configuration
 {
     internal class UserConfigurationProvider : IConfigurationProvider<UserConfiguration>
     {
