@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using RosalindSolver.Configuration;
+using RosalindSolver.Interfaces;
 
 namespace RosalindSolver
 {
@@ -11,7 +12,7 @@ namespace RosalindSolver
         private readonly string _fileName;
         private HashSet<string> _set;
 
-        public SolvedConfigurationProvider(ConfigurationValueProvider configurationProvider)
+        public SolvedConfigurationProvider(IConfigurationValueProvider configurationProvider)
         {
             _fileName = configurationProvider.Get(ConfigurationConstants.SolvedConfigFileKey) ?? ConfigurationConstants.DefaultSolvedConfigFileName;
         }

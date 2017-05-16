@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using RosalindSolver.App_LocalResourses;
+using RosalindSolver.Interfaces;
 
 namespace RosalindSolver
 {
-    internal static class ConsoleHelper
+    internal class ConsoleIntputProvider : IUserInputProvider
     {
         private static readonly IValueValidator DefaultValidator;
 
-        static ConsoleHelper()
+        static ConsoleIntputProvider()
         {
             DefaultValidator = new FuncValidator(v => !string.IsNullOrWhiteSpace(v), Resources.ValueShoulNotBeEmpty);
         }
 
-        public static void RequestValueSaving(string name, string value, IValueProvider valueProvider)
+        public void RequestValueSaving(string name, string value, IValueProvider valueProvider)
         {
             if (valueProvider == null) return;
             while (true)
@@ -35,12 +33,12 @@ namespace RosalindSolver
             }
         }
 
-        public static string RequestValueAndSaving(string name, IValueProvider valueProvider)
+        public string RequestValueAndSaving(string name, IValueProvider valueProvider)
         {
             return RequestValueAndSaving(name, DefaultValidator, valueProvider);
         }
 
-        public static string RequestValueAndSaving(string name, IValueValidator validator, IValueProvider valueProvider)
+        public string RequestValueAndSaving(string name, IValueValidator validator, IValueProvider valueProvider)
         {
             var result = validator.Validate(valueProvider?.Get(name));
             while (!result.IsValid)
@@ -59,12 +57,12 @@ namespace RosalindSolver
             return result.Value;
         }
 
-        public static string SelectOption(IList<string> items)
+        public string SelectOption(IList<string> items)
         {
             return SelectOption(items, s => s);
         }
 
-        public static T SelectOption<T>(IList<T> items, Func<T, string> getName)
+        public T SelectOption<T>(IList<T> items, Func<T, string> getName)
         {
             var optionsWithNumbers = items.Select((e, i) => $"{i + 1}. {getName(e)}");
             foreach (var option in optionsWithNumbers)

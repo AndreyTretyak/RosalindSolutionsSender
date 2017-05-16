@@ -6,14 +6,16 @@ using RosalindSolver.Interfaces;
 
 namespace RosalindSolver
 {
-    internal class ConsoleSelectedProblemProvider : ISelectedProblemProvider, IUnsolvedProblemProvider
+    internal class SelectedProblemProvider : ISelectedProblemProvider, IUnsolvedProblemProvider
     {
-        private readonly ConfigurationValueProvider _configurationProvider;
+        private readonly IUserInputProvider _inputProvider;
+        private readonly IConfigurationValueProvider _configurationProvider;
         private readonly SolvedConfigurationProvider _solvedConfigurationProvider;
         private readonly ISolverProvider _solverProvider;
 
-        public ConsoleSelectedProblemProvider(ISolverProvider solverProvider, ConfigurationValueProvider provider, SolvedConfigurationProvider solvedConfigurationProvider)
+        public SelectedProblemProvider(IUserInputProvider inputProvider, ISolverProvider solverProvider, IConfigurationValueProvider provider, SolvedConfigurationProvider solvedConfigurationProvider)
         {
+            _inputProvider = inputProvider;
             _configurationProvider = provider;
             _solvedConfigurationProvider = solvedConfigurationProvider;
             _solverProvider = solverProvider;
@@ -29,8 +31,8 @@ namespace RosalindSolver
             var solvers = _solverProvider.AvailableSolvers().ToList();
             var problemKey = _configurationProvider.Get(ConfigurationConstants.ProblemKeyKey);
             if (solvers.Contains(problemKey)) return problemKey;
-            var key = ConsoleHelper.SelectOption(solvers);
-            ConsoleHelper.RequestValueSaving(ConfigurationConstants.ProblemKeyKey, key, _configurationProvider);
+            var key = _inputProvider.SelectOption(solvers);
+            _inputProvider.RequestValueSaving(ConfigurationConstants.ProblemKeyKey, key, _configurationProvider);
             return key;
         }
 

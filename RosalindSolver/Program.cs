@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Text;
-using Autofac;
 using RosalindSolver.Interfaces;
 
 namespace RosalindSolver
@@ -9,7 +8,10 @@ namespace RosalindSolver
     {
         static void Main(string[] args)
         {
-            var container = DependencyRegistration.Build();
+            var builder = new DependencyContainerBuilder();
+            builder.Register<ConsoleIntputProvider, IUserInputProvider>();
+            builder.Register<ConfigurationValueProvider, IConfigurationValueProvider>();
+            var container = builder.Build();
             var consoleManager = container.Resolve<ConsoleManager>();
             consoleManager.StartExecutionLoopAsync().GetAwaiter().GetResult();
         }

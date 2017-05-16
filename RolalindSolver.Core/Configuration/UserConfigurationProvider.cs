@@ -7,26 +7,28 @@ using RosalindSolver.Interfaces;
 
 namespace RosalindSolver
 {
-    internal class ConsoleUserConfigurationProvider : IConfigurationProvider<UserConfiguration>
+    internal class UserConfigurationProvider : IConfigurationProvider<UserConfiguration>
     {
-        private readonly UserConfigurationValueProvider userConfigurationProvider;
+        private readonly IUserInputProvider _inputProvider;
+        private readonly UserConfigurationValueProvider _userConfigurationProvider;
 
-        public ConsoleUserConfigurationProvider(ConfigurationValueProvider provider)
+        public UserConfigurationProvider(IUserInputProvider inputProvider, IConfigurationValueProvider provider)
         {
+            _inputProvider = inputProvider;
             var fileName = provider.Get(ConfigurationConstants.UserConfigFileKey) ?? ConfigurationConstants.DefaultUserConfigFileName;
-            userConfigurationProvider = new UserConfigurationValueProvider(fileName);
+            _userConfigurationProvider = new UserConfigurationValueProvider(fileName);
         }
 
         public UserConfiguration GetConfiguration()
         {
-            var name = ConsoleHelper.RequestValueAndSaving(ConfigurationConstants.UserNameKey, userConfigurationProvider);
-            var password = ConsoleHelper.RequestValueAndSaving(ConfigurationConstants.PasswordKey, userConfigurationProvider);
+            var name = _inputProvider.RequestValueAndSaving(ConfigurationConstants.UserNameKey, _userConfigurationProvider);
+            var password = _inputProvider.RequestValueAndSaving(ConfigurationConstants.PasswordKey, _userConfigurationProvider);
             return new UserConfiguration(name, password);
         }
 
         public void ClearConfiguration()
         {
-            userConfigurationProvider.Clear();
+            _userConfigurationProvider.Clear();
         }
 
         internal class UserConfigurationValueProvider : IValueProvider

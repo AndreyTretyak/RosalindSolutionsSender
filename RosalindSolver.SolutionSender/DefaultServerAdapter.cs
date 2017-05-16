@@ -52,7 +52,7 @@ namespace RosalindSolver.ServerAdapter
                 var answer = await solver.SolveAsync(dataset);
                 var code = await solver.GetSourceCodeAsync();
                 var isCorrect = await SendResultAsync(client, token, serverConfiguration.GetResultUri(solver.Key), answer, code);
-                return new SolverCheckResult(isCorrect, dataset, answer);
+                return new SolverCheckResult(solver.Key, isCorrect, dataset, answer);
             }
         }
 

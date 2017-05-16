@@ -18,6 +18,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RosalindSolver.Solvers", "R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RosalingSolver.Tests", "RosalingSolver.Tests\RosalingSolver.Tests.csproj", "{A4B45E67-5D13-4F27-8F8E-32A7EC7A8188}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RosalingSolver.TestGenerator", "RosalingSolver.TestGenerator\RosalingSolver.TestGenerator.csproj", "{19B5BBA9-F7F7-4C81-A208-72911B352CA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolalindSolver.Core", "RolalindSolver.Core\RolalindSolver.Core.csproj", "{11F5EEA8-CB96-44CC-ABF6-5D7F2EEA9D27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +48,14 @@ Global
 		{A4B45E67-5D13-4F27-8F8E-32A7EC7A8188}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4B45E67-5D13-4F27-8F8E-32A7EC7A8188}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4B45E67-5D13-4F27-8F8E-32A7EC7A8188}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19B5BBA9-F7F7-4C81-A208-72911B352CA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19B5BBA9-F7F7-4C81-A208-72911B352CA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19B5BBA9-F7F7-4C81-A208-72911B352CA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19B5BBA9-F7F7-4C81-A208-72911B352CA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11F5EEA8-CB96-44CC-ABF6-5D7F2EEA9D27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11F5EEA8-CB96-44CC-ABF6-5D7F2EEA9D27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11F5EEA8-CB96-44CC-ABF6-5D7F2EEA9D27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11F5EEA8-CB96-44CC-ABF6-5D7F2EEA9D27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

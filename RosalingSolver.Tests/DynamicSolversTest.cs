@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
+using RosalindSolver.Interfaces;
+using RosalingSolver.TestGenerator;
 
 namespace RosalingSolver.Tests
 {
@@ -8,19 +11,15 @@ namespace RosalingSolver.Tests
     {
         private static object[] SolversTestData()
         {
-            throw new NotImplementedException();
-            return new object[]
-            {
-                new object[] {"", "", ""},
-                new object[] {"", "", ""},
-                new object[] {"", "", ""}
-            };
+            return new SolversTestGenerator().GetTestsData()
+                .Select(d => new object[] { d })
+                .ToArray();
         }
 
 
         [Test]
         [TestCaseSource(nameof(SolversTestData))]
-        public void DynamicSolversTest(string key, string input, string result)
+        public void DynamicSolversTest(SolverCheckResult result)
         {
             throw new NotImplementedException();
         }

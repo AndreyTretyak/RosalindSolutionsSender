@@ -9,6 +9,7 @@ namespace RosalindSolver
 {
     internal class ConsoleManager
     {
+        private readonly IUserInputProvider _inputProvider;
         private readonly IConfigurationProvider<UserConfiguration> _userConfigurationProvider;
         private readonly IConfigurationProvider<ServerConfiguration> _serverConfigurationProvider;
         private readonly ISelectedProblemProvider _selectedProblemProvider;
@@ -31,12 +32,14 @@ namespace RosalindSolver
         private readonly MenuItem[] _settingMenu; 
 
         public ConsoleManager(
+            IUserInputProvider inputProvider,
             IConfigurationProvider<UserConfiguration> userConfigurationProvider,
             IConfigurationProvider<ServerConfiguration> serverConfigurationProvider,
             ISelectedProblemProvider selectedProblemProvider,
             IUnsolvedProblemProvider unsolvedProblemProvider,
             ISolutionSender sender)
         {
+            _inputProvider = inputProvider;
             _userConfigurationProvider = userConfigurationProvider;
             _serverConfigurationProvider = serverConfigurationProvider;
             _selectedProblemProvider = selectedProblemProvider;
@@ -59,7 +62,7 @@ namespace RosalindSolver
         {
             while (true)
             {
-                var item = ConsoleHelper.SelectOption(_settingMenu, e => e.Name);
+                var item = _inputProvider.SelectOption(_settingMenu, e => e.Name);
                 await item.Action();
             }
         }
