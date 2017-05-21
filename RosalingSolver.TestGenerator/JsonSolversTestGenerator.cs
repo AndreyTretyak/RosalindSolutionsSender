@@ -8,12 +8,14 @@ namespace RosalingSolver.TestGenerator
 {
     public class JsonSolversTestGenerator : ISolversTestGenerator
     {
-        private readonly string _fileName = "TestCases.json";
+        private readonly string _fileName;
         private readonly JsonSerializer _serializer;
 
-        public JsonSolversTestGenerator()
+        public JsonSolversTestGenerator(IConfigurationValueProvider provider)
         {
             _serializer = JsonSerializer.Create();
+            _fileName = provider.Get(ConfigurationConstants.GeneratedTestCasesFileKey) 
+                ?? ConfigurationConstants.GeneratedTestCasesFileName;
         }
 
         public Task CreateTestAsync(SolverCheckResult result)

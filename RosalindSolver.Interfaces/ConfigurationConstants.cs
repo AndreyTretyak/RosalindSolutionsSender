@@ -1,6 +1,6 @@
-﻿namespace RolalindSolver.Core.Configuration
+﻿namespace RosalindSolver.Interfaces
 {
-    internal class ConfigurationConstants
+    public class ConfigurationConstants
     {
         public const string RosalidHostKey = "RosalindHost";
         public const string UserConfigFileKey = "UserConfigFile";
@@ -10,5 +10,7 @@
         public const string ProblemKeyKey = "ProblemKey";
         public const string SolvedConfigFileKey = "UserConfigFile";
         public const string DefaultSolvedConfigFileName = "solved.user";
+        public const string GeneratedTestCasesFileKey = "GeneratedTestCasesFile";
+        public const string GeneratedTestCasesFileName = "generatedTests.json";
     }
 }

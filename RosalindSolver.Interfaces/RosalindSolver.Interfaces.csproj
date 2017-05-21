@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationConstants.cs" />
     <Compile Include="IConfigurationProvider.cs" />
     <Compile Include="ISelectedProblemProvider.cs" />
     <Compile Include="IServerAdapter.cs" />

@@ -8,12 +8,14 @@ namespace RosalingSolver.TestGenerator
 {
     public class BinarySolversTestGenerator : ISolversTestGenerator
     {
-        private readonly string _fileName = "TestCases.data";
+        private readonly string _fileName;
         private readonly BinaryFormatter _serializer;
 
-        public BinarySolversTestGenerator()
+        public BinarySolversTestGenerator(IConfigurationValueProvider provider)
         {
             _serializer = new BinaryFormatter();
+            _fileName = provider.Get(ConfigurationConstants.GeneratedTestCasesFileKey)
+                        ?? ConfigurationConstants.GeneratedTestCasesFileName;
         }
 
         public Task CreateTestAsync(SolverCheckResult result)

@@ -53,14 +53,25 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RolalindSolver.Core\RolalindSolver.Core.csproj">
+      <Project>{11f5eea8-cb96-44cc-abf6-5d7f2eea9d27}</Project>
+      <Name>RolalindSolver.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RosalindSolver.Interfaces\RosalindSolver.Interfaces.csproj">
       <Project>{745f5732-accd-4335-b45c-90a9224aa41c}</Project>
       <Name>RosalindSolver.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RosalindSolver\RosalindSolver.Console.csproj">
+      <Project>{c8056fea-ca29-4539-8cbf-1e0e7e00ddd4}</Project>
+      <Name>RosalindSolver.Console</Name>
     </ProjectReference>
     <ProjectReference Include="..\RosalingSolver.TestGenerator\RosalingSolver.TestGenerator.csproj">
       <Project>{19b5bba9-f7f7-4c81-a208-72911b352ca1}</Project>
       <Name>RosalingSolver.TestGenerator</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CoreTests\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,12 +12,14 @@ namespace RosalingSolver.TestGenerator
 {
     public class XmlSolversTestGenerator : ISolversTestGenerator
     {
-        private readonly string _fileName = "TestCases.xml";
+        private readonly string _fileName;
         private readonly XmlSerializer _serializer;
 
-        public XmlSolversTestGenerator()
+        public XmlSolversTestGenerator(IConfigurationValueProvider provider)
         {
             _serializer = new XmlSerializer(typeof(SolverCheckResult));
+            _fileName = provider.Get(ConfigurationConstants.GeneratedTestCasesFileKey)
+                        ?? ConfigurationConstants.GeneratedTestCasesFileName;
         }
 
         public Task CreateTestAsync(SolverCheckResult result)

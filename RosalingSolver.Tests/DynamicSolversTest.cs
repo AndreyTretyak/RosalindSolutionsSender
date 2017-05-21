@@ -11,9 +11,9 @@ namespace RosalingSolver.Tests
     {
         private static object[] SolversTestData()
         {
-            return new JsonSolversTestGenerator().GetTestsData()
-                .Select(d => new object[] { d })
-                .ToArray();
+            //return new JsonSolversTestGenerator().GetTestsData()
+            //    .Select(d => new object[] { d })
+            //    .ToArray();
         }
 
 

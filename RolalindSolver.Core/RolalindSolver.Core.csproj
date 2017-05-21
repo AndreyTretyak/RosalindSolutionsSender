@@ -49,7 +49,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Configuration\ConfigurationConstants.cs" />
     <Compile Include="Configuration\SelectedProblemProvider.cs" />
     <Compile Include="Configuration\ServerConfigurationProvider.cs" />
     <Compile Include="Configuration\UserConfigurationProvider.cs" />
