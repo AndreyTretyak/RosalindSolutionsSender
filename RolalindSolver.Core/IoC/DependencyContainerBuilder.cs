@@ -49,7 +49,7 @@ namespace RolalindSolver.Core.IoC
                     .As<ISelectedProblemProvider>()
                     .As<IUnsolvedProblemProvider>();
 
-            _builder.RegisterType<SolversTestGenerator>()
+            _builder.RegisterType<JsonSolversTestGenerator>()
                     .As<ISolversTestGenerator>();
 
             //builder.RegisterType<FiboSolver>().As<ISolver>().Keyed<ISolver>("fibo");
