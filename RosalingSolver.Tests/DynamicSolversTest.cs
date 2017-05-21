@@ -14,6 +14,7 @@ namespace RosalingSolver.Tests
             //return new JsonSolversTestGenerator().GetTestsData()
             //    .Select(d => new object[] { d })
             //    .ToArray();
+            throw new NotImplementedException();
         }
 
 
