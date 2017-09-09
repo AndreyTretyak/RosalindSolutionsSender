@@ -2,6 +2,7 @@
 using System.Linq;
 using Autofac;
 using RolalindSolver.Core.Configuration;
+using RosalindSolver;
 using RosalindSolver.Interfaces;
 using RosalindSolver.ServerAdapter;
 using RosalingSolver.TestGenerator;
@@ -51,6 +52,9 @@ namespace RolalindSolver.Core.IoC
 
             _builder.RegisterType<JsonSolversTestGenerator>()
                     .As<ISolversTestGenerator>();
+
+            _builder.RegisterType<ConfigurationValueProvider>()
+                    .As<IConfigurationValueProvider>();
 
             //builder.RegisterType<FiboSolver>().As<ISolver>().Keyed<ISolver>("fibo");
             //builder.RegisterType<TestSolver>().As<ISolver>().Keyed<ISolver>("test");
