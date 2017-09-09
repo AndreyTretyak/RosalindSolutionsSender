@@ -1,15 +1,15 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
-using NUnit.Framework;
 using RosalindSolver.Interfaces;
 using RosalingSolver.TestGenerator;
+using Xunit;
 
 namespace RosalingSolver.Tests
 {
-    [TestFixture]
     public class DynamicSolversTests
     {
-        private static object[] SolversTestData()
+        private static TheoryData<SolverCheckResult> SolversTestData()
         {
             //return new JsonSolversTestGenerator().GetTestsData()
             //    .Select(d => new object[] { d })
@@ -18,11 +18,12 @@ namespace RosalingSolver.Tests
         }
 
 
-        [Test]
-        [TestCaseSource(nameof(SolversTestData))]
+        [Theory, MemberData(nameof(SolversTestData))]
         public void DynamicSolversTest(SolverCheckResult result)
         {
             throw new NotImplementedException();
         }
     }
+
+
 }
