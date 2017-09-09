@@ -11,10 +11,12 @@ namespace RosalingSolver.Tests
     {
         private static TheoryData<SolverCheckResult> SolversTestData()
         {
-            //return new JsonSolversTestGenerator().GetTestsData()
-            //    .Select(d => new object[] { d })
-            //    .ToArray();
-            throw new NotImplementedException();
+            var result = new TheoryData<SolverCheckResult>();
+            foreach (var data in new SolversTestGenerator().GetTestsData())
+            {
+                result.Add(data);
+            }
+            return result;
         }
 
 
