@@ -1,4 +1,4 @@
-## Rosling solution sender
+## Rosling solution sender +
 
 Solution to simlify problem submission to http://rosalind.info. 
 
