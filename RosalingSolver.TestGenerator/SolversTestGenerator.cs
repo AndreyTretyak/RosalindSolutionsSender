@@ -11,7 +11,7 @@ namespace RosalingSolver.TestGenerator
     public class SolversTestGenerator : ISolversTestGenerator
     {
         private const string DataFileName = "SolversTestInfo.json";
-        private const string CorrectResut = "Correct";
+        private const string CorrectResult = "Correct";
         private const string WrongResult = "WrongResult{0}";
         private IConfigurationRoot Configuration { get; }
 
@@ -23,10 +23,10 @@ namespace RosalingSolver.TestGenerator
                 .Build();
         }
 
-        public void CreateTestAsync(SolverCheckResult result)
+        public Task CreateTestAsync(SolverCheckResult result)
         {
             var section = Configuration.GetSection(result.Key).GetSection(result.Dataset);
-            if (section[CorrectResut] != null) return;
+            if (section[CorrectResult] != null) return Task.CompletedTask;
             if (result.IsCorrect)
             {
                 foreach (var pair in section.AsEnumerable())
@@ -34,19 +34,21 @@ namespace RosalingSolver.TestGenerator
                     section[pair.Key] = null;
                 }
 
-                section[CorrectResut] = result.Answer;
+                section[CorrectResult] = result.Answer;
             }
             else
             {
                 var count = 0;
                 foreach (var pair in section.AsEnumerable())
                 {
-                    if (pair.Value == result.Answer) return;
+                    if (pair.Value == result.Answer) return Task.CompletedTask;
                     count++;
                 }
 
                 section[string.Format(WrongResult, count + 1)] = result.Answer;
             }
+
+            return Task.CompletedTask;
         }
 
         public IEnumerable<SolverCheckResult> GetTestsData()
@@ -59,7 +61,7 @@ namespace RosalingSolver.TestGenerator
                     var dataset = datasetSection.Key;
                     foreach (var result in datasetSection.AsEnumerable())
                     {
-                        yield return new SolverCheckResult(key, result.Key == CorrectResut, dataset, result.Value);
+                        yield return new SolverCheckResult(key, result.Key == CorrectResult, dataset, result.Value);
                     }
 
                 }
