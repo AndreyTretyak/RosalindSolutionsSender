@@ -50,8 +50,8 @@ namespace RolalindSolver.Core.IoC
                     .As<ISelectedProblemProvider>()
                     .As<IUnsolvedProblemProvider>();
 
-            _builder.RegisterType<JsonSolversTestGenerator>()
-                    .As<ISolversTestGenerator>();
+            //_builder.RegisterType<JsonSolversTestGenerator>()
+            //        .As<ISolversTestGenerator>();
 
             _builder.RegisterType<ConfigurationValueProvider>()
                     .As<IConfigurationValueProvider>();

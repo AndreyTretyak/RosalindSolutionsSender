@@ -5,7 +5,7 @@ namespace RosalindSolver.Interfaces
 {
     public interface ISolversTestGenerator
     {
-        void CreateTestAsync(SolverCheckResult result);
+        Task CreateTestAsync(SolverCheckResult result);
 
         IEnumerable<SolverCheckResult> GetTestsData();
     }
