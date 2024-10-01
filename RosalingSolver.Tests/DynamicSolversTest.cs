@@ -9,7 +9,7 @@ namespace RosalingSolver.Tests
 {
     public class DynamicSolversTests
     {
-        private static TheoryData<SolverCheckResult> SolversTestData()
+        public static TheoryData<SolverCheckResult> SolversTestData()
         {
             var result = new TheoryData<SolverCheckResult>();
             foreach (var data in new SolversTestGenerator().GetTestsData())
